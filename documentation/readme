@@ -1,0 +1,8 @@
+Readme
+
+In this folder there are the following documents:
+
+* documentation_over_years.xlsx - contains all of the raw data documentation over the time period of 2002-2018. Each change in documentation is denoted with a change of color.
+* final_documentation_by_year.xlsx - contains all the locations of the data in the raw text files, along with the names to be called, labels to create. This file is most important for the R code that writes in the STATA files. 
+* missing_codes.rtf - contains notes on where missing data is and their corresponding codes. My guess is this is incomplete. It was left over from Heather's RA work.
+

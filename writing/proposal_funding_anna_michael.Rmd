@@ -1,0 +1,86 @@
+---
+title: "Funding Request: Gunshot Noise and Birth Outcomes"
+output: 
+  pdf_document:
+    number_sections: true
+author: 
+  - Anna Jaskiewicz and Michael Topper
+editor_options: 
+  chunk_output_type: console
+indent: true
+bibliography: "references.bib"
+link-citations: yes
+linkcolor: blue
+header-includes:
+- \usepackage{amsfonts}
+- \usepackage{amsthm}
+- \usepackage{amsmath}
+- \usepackage{bbm} ##for indicator
+- \usepackage[english]{babel}
+- \usepackage{bm}
+- \usepackage{float}
+- \usepackage[fontsize=12pt]{scrextend}
+- \usepackage{indentfirst}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\noindent This project studies the effect of gunshot noise on birth outcomes. We request $2000 of funds for a purchase of the California Department of Public Health (CDPH) birth records data.
+
+# Objectives and Significance to Research Agenda
+
+## Objectives and Project Overview
+
+The effect of adverse birth outcomes on later-life human capital accumulation, labor market outcomes, and overall health is well-established in the literature. Children born with low birth weight or born prematurely have a higher probability of dropping out of high school, leaving the labor force, earning lower wages, and suffering from worse overall health in adulthood [@case_lasting_2005; @johnson_influence_2011; @salm_role_2008]. In-utero exposure to stress is vital in generating adverse birth outcomes [@almond_killing_2011; @almond_childhood_2018; @aizer_long-run_2016]. Past research documents that area-level stressors such as high local homicide rates carry the potential to depress birth outcomes [@brown_mexican_2018]. This is because the fear of becoming a victim of crime is
+associated with adverse mental health outcomes, such as stress [@robinson_impacts_2000].
+To the best of our knowledge, past literature has not yet quantified the impact of
+fear of crime as proxied by hearing gunshots on birth outcomes. We hypothesize that an increased incidence of gunshot noise in the neighborhood of mother's residence during pregnancy will be associated with higher risk of preterm delivery and lower infant birthweight. More specifically, the main research question is: Does exposure to high levels of gunshot noise during pregnancy negatively impacts birth outcomes of mothers in California? Intuitively, we will be comparing mothers who experience gunshot noise close to their home to mothers who live slightly farther away.
+
+This research involves matching two particular data sets: ShotSpotter data (publicly available) and CDPH  birth records  data (requesting for purchase). First, the Shotspotter data contains geolocated information on gunshots that are heard across a city. These gunshots are identified by microphones that can triangulate the location of the gunshot fire. Second, and more importantly, the CDPH data includes the universe of all mothers who experienced a birth in California. This data includes rich covariates including mother street address, apgar score, type of birth, infant birthweight, and infant mortality. By merging both of these data sets by geolocation, we will create a novel data set that can map gunshot noise to a mother's home address.
+
+
+## Significance to Research Agenda
+
+This paper is planned to be a chapter in each of our dissertations. Both of our research agendas intersect between the economics of health and the economics of crime. While each of us want this to be a chapter in our dissertation, the primary goal is for this project to become a published journal article. 
+
+
+# Necessity of Funding
+
+The CDPH birth data is priced at 2000 dollars. Given that our study focuses on birth outcomes, this data is necessary to complete the project. While there are other US states that provide this data free, we are constrained by the availability of the ShotSpotter data. In particular, ShotSpotter only covers certain cities in the US due to the costly implementation of microphones and their questionable effectiveness in controlling crime. However, Shotspotter provides substantial coverage in California with 13 unique cities. These cities have large variation in both size (e.g., San Diego/Salinas) and crime-rates (Oakland/Palo ALto), thus giving more flexibility in our analysis.  
+
+# Schedule of Paper
+
+The paper will be completed in the following timeline. Note that this is a rough approximation.
+
+* **Summer 2022:** 
+  + Exploratory analysis of Shotspotter and CDPH data.
+  + Geocoding the CDPH data and merging the two data sets.
+  + Further exploratory analysis/preliminary results.
+* **Fall 2022:** 
+  + Refine results and perform necessary robustness checks. 
+  + Create first draft of paper based on results.
+* **Winter/Spring 2023:** 
+  + Present results in AMEL and refine paper. 
+  + Based on comments, send to journals for publication. 
+
+
+# Detailed Budget
+
+For this project, we request $2000.00. This will cover the cost of purchasing the necessary CDPH data.
+
+The breakdown of the project budget is as follows:
+
+* **Funds Requested:** $2000.00
+* **Budget Breakdown:**
+  + 2000 Birth Data (Data Creation Fee) - $500
+  + 2001-2020 Birth Data ($75 x 20 Additional Years) - $1500
+  + Total: $2000
+  
+\newpage
+
+# References
+  
+  
+
