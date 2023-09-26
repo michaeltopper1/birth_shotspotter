@@ -4,6 +4,7 @@ There are 4 files that are pertinent to this project as of
 Sept. 26th 2023
 
 - clean_sf_new.R - cleans the SST data
-- extract_census_blocks_sf_sd.R
+- extract_census_blocks_sf_sd.R - gets census blocks needed 
 - spatialjoin_gunshots_blocks_sf.R - spatial joins all SST into districts
 - spatial_join_sf_911 - cleans and spatial joins all 911 data
+- spatialjoin_address_census_blocks.R - spatial joins mother addresses into correct census blocks
