@@ -14,7 +14,7 @@ fresno <- readxl::read_excel("added_data/fresno.xlsx") %>% janitor::clean_names(
 fresno_address_geocode <- read_csv("address_data/fresno_addresses_geocodio.csv")
 
 ## for spatial join
-census_block_fresno <- st_read("data/fresno_census_data.shp")
+census_block_fresno <- st_read("data/shapefiles/fresno_census_data.shp")
 
 
 fresno <- fresno %>% 
@@ -68,14 +68,14 @@ fresno_geo_joined <- fresno_geo_joined %>%
 
 # creating panel of dates -------------------------------------------------
 
-panel_dates <- seq(as_date("2016-01-01"), as_date("2021-01-01") , by= "month") %>% 
-  as_tibble() %>% 
-  rename(date = value) %>% 
-  mutate(month = month(date),
-         year = year(date),
-         day = day(date),
-         week = week(date)) %>% 
-  mutate(year_month = ymd(paste0(year, "-",month, "-1")))
+panel_dates <- birthsst::create_panel(start_date = "2016-01-01",
+                                      end_date = "2021-01-01",
+                                      by = "month")
+
+
+## getting rid of certain days with gunfire heavy false-positive
+fresno_geo_joined <- fresno_geo_joined %>% 
+  birthsst::filter_false_positive_dates()
 
 block_panel <- fresno_geo_joined %>% 
   st_drop_geometry() %>% 
@@ -86,10 +86,11 @@ block_panel <- fresno_geo_joined %>%
 # aggregating -------------------------------------------------------------
 
 fresno_geo_joined <- fresno_geo_joined %>% 
-  group_by(year_month, GEOID, NAME, waking_hours) %>% 
-  summarize(number_sst = n()) %>% 
-  ungroup()
-
+  group_by(year_month, GEOID, NAME) %>% 
+  summarize(number_gunshot_waking_hours = sum(waking_hours),
+            number_gunshots = n()) %>% 
+  ungroup() %>% 
+  arrange(desc(number_gunshots)) 
 
 
 fresno_geo_joined <- block_panel %>% 
@@ -111,14 +112,13 @@ fresno_geo_joined <- fresno_geo_joined %>%
            as.character()) 
 
 fresno_geo_joined <- fresno_geo_joined %>% 
-  rename(number_gunshot_waking_hours = waking_hours,
-         number_gunshots = number_sst) %>% 
   mutate(shotspotter_city = "Fresno") %>% 
   select(NAME, census_block, census_block_group,
          census_tract, GEOID, year_month, 
          number_gunshot_waking_hours, number_gunshots,
          shotspotter_city) %>% 
   mutate(number_w_duplicate_areamatch = NA)
+
 
 fresno_geo_joined %>% 
   write_csv("analysis_data/fresno_gunshots_blocks.csv")

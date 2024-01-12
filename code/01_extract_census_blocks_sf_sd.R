@@ -22,8 +22,8 @@ census_block_sf <- get_decennial(geography = "block",
                                  year = 2020,
                                  geometry = T)
 
-census_block_sf %>% 
-  st_write("data/sf_census_data.shp")
+census_block_sf %>%
+  st_write("data/shapefiles/sf_census_data.shp")
 
 ## grabbing the data (SD)
 census_block_sd <- get_decennial(geography = "block",
@@ -35,7 +35,7 @@ census_block_sd <- get_decennial(geography = "block",
 
 
 census_block_sd %>% 
-  st_write("data/sd_census_data.shp")
+  st_write("data/shapefiles/sd_census_data.shp")
 
 ## grabbing the data (FRESNO)
 census_block_fresno <- get_decennial(geography = "block",
@@ -46,7 +46,7 @@ census_block_fresno <- get_decennial(geography = "block",
                                      geometry = T)
 
 census_block_fresno %>% 
-  st_write("data/fresno_census_data.shp")
+  st_write("data/shapefiles/fresno_census_data.shp")
 
 ## grabbing the data for stockton
 census_block_stockton <- get_decennial(geography = "block",
@@ -56,7 +56,7 @@ census_block_stockton <- get_decennial(geography = "block",
                                        year = 2020,
                                        geometry = T)
 census_block_stockton %>% 
-  st_write("data/stockton_census_data.shp")
+  st_write("data/shapefiles/stockton_census_data.shp")
 
 ## grabbing the data for Oakland (alemeda county)
 census_block_oakland <- get_decennial(geography = "block",
@@ -66,7 +66,7 @@ census_block_oakland <- get_decennial(geography = "block",
                                        year = 2020,
                                        geometry = T)
 census_block_oakland %>% 
-  st_write("data/oakland_census_data.shp")
+  st_write("data/shapefiles/oakland_census_data.shp")
 
 ## grabbing the data for San pablo
 census_block_pablo <- get_decennial(geography = "block",
@@ -76,4 +76,4 @@ census_block_pablo <- get_decennial(geography = "block",
                                        year = 2020,
                                        geometry = T)
 census_block_pablo %>% 
-  st_write("data/sanpablo_census_data.shp")
+  st_write("data/shapefiles/sanpablo_census_data.shp")

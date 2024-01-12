@@ -12,7 +12,7 @@ library(mapview)
 
 # loading in data ---------------------------------------------------------
 
-census_block_sf <- st_read("data/sf_census_data.shp")
+census_block_sf <- st_read("data/shapefiles/sf_census_data.shp")
 
 ## unsure if the cad_number for the old shotspotter stuff means that it wasn't actually
 ## a shot. Might just want to test out with the 2016 data first.
@@ -40,6 +40,12 @@ sf_joined <- sf_joined %>%
 
 # this shows waking hour shots  -------------------------------------------
 
+sf_joined <- sf_joined %>% 
+  mutate(year = year(date_shot),
+         month = month(date_shot),
+         day = day(date_shot),
+         year_month = mdy(paste0(month, "-1-", year)))
+
 ## put in waking hours for 7am-11pm
 sf_joined <- sf_joined %>% 
   mutate(hour = hour(datetime_shot),
@@ -48,14 +54,13 @@ sf_joined <- sf_joined %>%
 
 # creating panel of dates -------------------------------------------------
 
-panel_dates <- seq(as_date("2016-01-01"), as_date("2021-01-01") , by= "day") %>% 
-  as_tibble() %>% 
-  rename(date = value) %>% 
-  mutate(month = month(date),
-         year = year(date),
-         day = day(date),
-         week = week(date)) %>% 
-  mutate(year_month = ymd(paste0(year, "-",month, "-1")))
+panel_dates <- birthsst::create_panel(start_date = "2016-01-01",
+                                      end_date = "2021-01-01",
+                                      by = "month")
+
+## getting rid of certain days with gunfire heavy false-positive
+sf_joined <- sf_joined %>% 
+  birthsst::filter_false_positive_dates()
 
 block_panel <- sf_joined %>% 
   st_drop_geometry() %>% 
@@ -71,21 +76,20 @@ sf_joined <- sf_joined %>%
   distinct(cad_number, .keep_all = T) %>% 
   select(-n)
 
-sf_joined_block_counts <- sf_joined %>%
+sf_joined <- sf_joined %>% 
   st_drop_geometry() %>% 
-  group_by(date_shot, GEOID, NAME) %>% 
+  group_by(year_month, GEOID, NAME) %>% 
   summarize(number_w_duplicate_areamatch = sum(duplicate_area),
             number_gunshot_waking_hours = sum(waking_hour_shot),
             number_gunshots = n()) %>% 
-  ungroup() %>% 
-  arrange(desc(number_gunshots)) 
+  ungroup() 
 
 
 block_panel <- block_panel %>% 
-  left_join(sf_joined_block_counts,
+  left_join(sf_joined,
             by = join_by(NAME == NAME,
                          GEOID == GEOID,
-                         date == date_shot))
+                         year_month == year_month))
 
 ## replacing NAs with 0s for the shots
 block_panel <- block_panel %>% 
@@ -93,8 +97,6 @@ block_panel <- block_panel %>%
 
 
 sf_monthly_merged <- block_panel %>% 
-  group_by(year_month, GEOID, NAME) %>% 
-  summarize(across(starts_with("number"), ~sum(.))) %>% 
   extract(NAME, into = c("census_block", "census_block_group", "census_tract"),
           "Block\\s(\\d{1,4}).{1,}Group\\s(\\d{1,2}),.{1,}Tract\\s(.{1,}\\d{1,3}),.{1,}", remove = F) %>% 
   mutate(shotspotter_city = "San Francisco")
