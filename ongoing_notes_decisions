@@ -1,0 +1,6 @@
+Notes and Decisions:
+
+- When there is a type of gunshot that is "Probable", we keep these.
+- Alternatively, if there is a type of gunshot labeled as "Not Gunshot" these are omitted
+- Going to use 2020 Census data for blocks. I doubt it'll make too big of a difference for the heterogeneity analysis. Can always try it with both later.
+- In census tract median income data, some census tracts end up in two counties. To deal with this issue, we take the average of the income in these counties.

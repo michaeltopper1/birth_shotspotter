@@ -92,6 +92,11 @@ fresno_geo_joined <- fresno_geo_joined %>%
   ungroup() %>% 
   arrange(desc(number_gunshots)) 
 
+## change in expansion in Feb 2018. Getting rid any time after
+## can add back in if needed
+fresno_geo_joined <- fresno_geo_joined %>% 
+  filter(year_month <= as_date("2018-01-01"))
+
 
 fresno_geo_joined <- block_panel %>% 
   left_join(fresno_geo_joined,

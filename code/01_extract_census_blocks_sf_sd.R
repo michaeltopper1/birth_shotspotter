@@ -68,7 +68,7 @@ census_block_oakland <- get_decennial(geography = "block",
 census_block_oakland %>% 
   st_write("data/shapefiles/oakland_census_data.shp")
 
-## grabbing the data for San pablo
+## grabbing the data for San pablo - same county for Richmond as well
 census_block_pablo <- get_decennial(geography = "block",
                                        state = "CA",
                                        county = "Contra Costa County",
@@ -77,3 +77,16 @@ census_block_pablo <- get_decennial(geography = "block",
                                        geometry = T)
 census_block_pablo %>% 
   st_write("data/shapefiles/sanpablo_census_data.shp")
+
+## grabbing the data for East Palo Alto
+census_block_east_palo_alto <- get_decennial(geography = "block",
+                                    state = "CA",
+                                    county = "San Mateo County",
+                                    variables = variables,
+                                    year = 2020,
+                                    geometry = T)
+
+
+
+census_block_east_palo_alto %>% 
+  st_write("data/shapefiles/east_palo_alto_census_data.shp")

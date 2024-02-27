@@ -5,6 +5,8 @@
 ## Date Last Edited: 2023-03-07
 ##
 
+## this file will match the addresses to the census blocks
+
 library(tidyverse)
 library(sf)
 library(mapview)
@@ -87,6 +89,7 @@ mother_addresses <- sf_mother_addresses %>%
 mother_addresses <- mother_addresses %>% 
   select(-ends_with("max"), -ends_with("min"),
          -status, -match_type, -value) 
+
 
 
 mother_addresses %>% 
