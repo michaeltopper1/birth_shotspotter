@@ -55,6 +55,9 @@ address_oakland <- address %>%
 address_east_palo <- address %>% 
   st_join(census_block_east_palo, join = st_within)
 
+address_sd <- address %>% 
+  st_join(census_block_sd, join = st_within)
+
 ## filtering to only the matched addresses within block
 sf_mother_addresses <- address_sf %>% 
   st_drop_geometry() %>%
@@ -76,7 +79,13 @@ oakland_mother_addresses <- address_oakland %>%
   st_drop_geometry() %>%
   filter(!is.na(NAME)) 
 
+east_palo_mother_addresses <- address_east_palo %>% 
+  st_drop_geometry() %>% 
+  filter(!is.na(NAME))
 
+sd_mother_addresses <- address_sd %>% 
+  st_drop_geometry() %>% 
+  filter(!is.na(NAME))
 
 # pooling together the addresses ------------------------------------------
 
@@ -84,7 +93,9 @@ mother_addresses <- sf_mother_addresses %>%
   bind_rows(stockton_mother_addresses,
             pablo_mother_addresses,
             fresno_mother_addresses,
-            oakland_mother_addresses)
+            oakland_mother_addresses,
+            east_palo_mother_addresses,
+            sd_mother_addresses)
 
 mother_addresses <- mother_addresses %>% 
   select(-ends_with("max"), -ends_with("min"),
