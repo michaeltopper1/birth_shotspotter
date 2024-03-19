@@ -43,7 +43,7 @@ oakland_joined <- oakland_joined %>%
 
 ## need to get the earliest date of implementation and final date of SST
 ## going to use august instead of july to get a full month
-panel_dates <- birthsst::create_panel(start_date = "2008-01-02",
+panel_dates <- birthsst::create_panel(start_date = "2011-07-01",
                                       end_date = "2013-10-01",
                                       by = "month")
 
