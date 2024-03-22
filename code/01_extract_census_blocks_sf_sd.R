@@ -20,7 +20,7 @@ census_block_sf <- get_decennial(geography = "block",
                                  county = "San Francisco",
                                  variables = variables,
                                  year = 2020,
-                                 geometry = T)
+                                 geometry = F)
 
 census_block_sf %>%
   st_write("data/shapefiles/sf_census_data.shp")
@@ -31,7 +31,7 @@ census_block_sd <- get_decennial(geography = "block",
                                  county = "San Diego",
                                  variables = variables,
                                  year = 2020,
-                                 geometry = T)
+                                 geometry = F)
 
 
 census_block_sd %>% 
@@ -43,7 +43,7 @@ census_block_fresno <- get_decennial(geography = "block",
                                      county = "Fresno",
                                      variables = variables,
                                      year = 2020,
-                                     geometry = T)
+                                     geometry = F)
 
 census_block_fresno %>% 
   st_write("data/shapefiles/fresno_census_data.shp")
@@ -54,7 +54,7 @@ census_block_stockton <- get_decennial(geography = "block",
                                        county = "San Joaquin County",
                                        variables = variables,
                                        year = 2020,
-                                       geometry = T)
+                                       geometry = F)
 census_block_stockton %>% 
   st_write("data/shapefiles/stockton_census_data.shp")
 
@@ -64,7 +64,7 @@ census_block_oakland <- get_decennial(geography = "block",
                                        county = "Alameda County",
                                        variables = variables,
                                        year = 2020,
-                                       geometry = T)
+                                       geometry = F)
 census_block_oakland %>% 
   st_write("data/shapefiles/oakland_census_data.shp")
 
@@ -74,7 +74,7 @@ census_block_pablo <- get_decennial(geography = "block",
                                        county = "Contra Costa County",
                                        variables = variables,
                                        year = 2020,
-                                       geometry = T)
+                                       geometry = F)
 census_block_pablo %>% 
   st_write("data/shapefiles/sanpablo_census_data.shp")
 
@@ -84,9 +84,20 @@ census_block_east_palo_alto <- get_decennial(geography = "block",
                                     county = "San Mateo County",
                                     variables = variables,
                                     year = 2020,
-                                    geometry = T)
+                                    geometry = F)
 
 
 
 census_block_east_palo_alto %>% 
   st_write("data/shapefiles/east_palo_alto_census_data.shp")
+
+## grabbing the data for Bakersfield
+census_block_bakersfield <- get_decennial(geography = "block",
+                                          state = "CA",
+                                          county = "Kern County",
+                                          variables = variables,
+                                          year = 2020,
+                                          geometry = T)
+
+census_block_bakersfield %>% 
+  st_write("data/shapefiles/bakersfield_census_data.shp")

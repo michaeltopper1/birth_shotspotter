@@ -30,6 +30,8 @@ census_block_oakland <- st_read("data/shapefiles/oakland_census_data.shp")
 
 census_block_east_palo <- st_read("data/shapefiles/east_palo_alto_census_data.shp")
 
+census_block_bakersfield <- st_read("data/shapefiles/bakersfield_census_data.shp")
+
 # merging addresses to census blocks ------------------------------------
 
 ## first changing to the correct coordinate reference system
@@ -57,6 +59,9 @@ address_east_palo <- address %>%
 
 address_sd <- address %>% 
   st_join(census_block_sd, join = st_within)
+
+address_bakersfield <- address %>% 
+  st_join(census_block_bakersfield, join = st_within)
 
 ## filtering to only the matched addresses within block
 sf_mother_addresses <- address_sf %>% 
@@ -87,6 +92,10 @@ sd_mother_addresses <- address_sd %>%
   st_drop_geometry() %>% 
   filter(!is.na(NAME))
 
+bakersfield_mother_addresses <- address_bakersfield %>% 
+  st_drop_geometry() %>% 
+  filter(!is.na(NAME))
+
 # pooling together the addresses ------------------------------------------
 
 mother_addresses <- sf_mother_addresses %>% 
@@ -95,7 +104,8 @@ mother_addresses <- sf_mother_addresses %>%
             fresno_mother_addresses,
             oakland_mother_addresses,
             east_palo_mother_addresses,
-            sd_mother_addresses)
+            sd_mother_addresses,
+            bakersfield_mother_addresses)
 
 mother_addresses <- mother_addresses %>% 
   select(-ends_with("max"), -ends_with("min"),

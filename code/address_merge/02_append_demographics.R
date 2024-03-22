@@ -39,6 +39,13 @@ sf_race <- get_decennial(geography = "block",
               geometry = F) %>% 
   pivot_wider(names_from = "variable", values_from = "value") 
 
+bakersfield_race <- get_decennial(geography = "block",
+                         state = "CA",
+                         county = "Kern County",
+                         variables = download_variables,
+                         geometry = F) %>% 
+  pivot_wider(names_from = "variable", values_from = "value") 
+
 fresno_race <- get_decennial(geography = "block",
                          state = "CA",
                          county = "Fresno",
@@ -96,6 +103,14 @@ ca_income_sf <- get_acs(
   year = 2020
 ) %>% mutate(county = "San Francisco")
 
+ca_income_bakersfield <- get_acs(
+  geography = "tract", 
+  variables = "B19013_001",
+  state = "CA",
+  county = "Kern County",
+  year = 2020
+) %>% mutate(county = "Bakersfield")
+
 ca_income_fresno <- get_acs(
   geography = "tract", 
   variables = "B19013_001",
@@ -147,7 +162,7 @@ ca_income_sd <- get_acs(
 ca_income <- ca_income_sf %>% 
   bind_rows(ca_income_fresno, ca_income_oakland,
             ca_income_east_palo, ca_income_stockton,
-            ca_income_pablo, ca_income_sd)
+            ca_income_pablo, ca_income_sd, ca_income_bakersfield)
 
 ca_income <- ca_income %>% 
   extract(NAME, into = "census_tract", "Census Tract\\s(.{1,10}),\\s.{1,},.{1,}",
@@ -170,7 +185,8 @@ ca_income_aggregate <- ca_income_aggregate %>%
 # combining race data -----------------------------------------------------
 
 race_data <- east_palo_race %>% 
-  bind_rows(fresno_race, oakland_race, pablo_richmond_race, sf_race, stockton_race, sd_race)
+  bind_rows(fresno_race, oakland_race, pablo_richmond_race, sf_race, stockton_race, sd_race,
+            bakersfield_race)
 
 race_data <- race_data %>% 
   mutate(across(starts_with("one_race"), ~100 * ./pop_one_race, .names = "percent_{.col}")) %>% 
