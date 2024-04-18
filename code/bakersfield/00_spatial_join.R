@@ -40,7 +40,7 @@ bakersfield_geo <- bakersfield_geo %>%
 ## waking hours
 bakersfield_geo <- bakersfield_geo %>% 
   mutate(hour = hour(time),
-         waking_hours = if_else(hour %in% c(6:23), 1, 0)) 
+         working_hours = if_else(hour %in% c(9:17), 1, 0)) 
 
 
 
@@ -64,7 +64,7 @@ block_panel <- bakersfield_geo %>%
 
 bakersfield_geo <- bakersfield_geo %>% 
   group_by(year_month, GEOID, NAME) %>% 
-  summarize(number_gunshot_waking_hours = sum(waking_hours),
+  summarize(number_gunshot_working_hours = sum(working_hours),
             number_gunshots = n()) %>% 
   ungroup() %>% 
   arrange(desc(number_gunshots)) 
@@ -80,7 +80,7 @@ bakersfield_geo_joined <- block_panel %>%
 
 ## replacing NAs with 0s for the shots
 bakersfield_geo_joined <- bakersfield_geo_joined %>% 
-  mutate(across(matches("^number|^waking"), ~replace_na(., 0)))
+  mutate(across(matches("^number|^working"), ~replace_na(., 0)))
 
 
 bakersfield_geo_joined <- bakersfield_geo_joined %>% 
@@ -93,7 +93,7 @@ bakersfield_geo_joined <- bakersfield_geo_joined %>%
   mutate(shotspotter_city = "Bakersfield") %>% 
   select(NAME, census_block, census_block_group,
          census_tract, GEOID, year_month, 
-         number_gunshot_waking_hours, number_gunshots,
+         number_gunshot_working_hours, number_gunshots,
          shotspotter_city) %>% 
   mutate(number_w_duplicate_areamatch = NA)
 

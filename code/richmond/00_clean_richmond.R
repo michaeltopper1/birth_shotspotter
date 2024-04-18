@@ -60,7 +60,7 @@ richmond_geo <- richmond_geo %>%
 
 richmond_geo <- richmond_geo %>% 
   mutate(hour = hour(time),
-         waking_hours = if_else(hour %in% c(6:23), 1, 0), .before = 1) 
+         working_hours = if_else(hour %in% c(9:17), 1, 0), .before = 1) 
 
 
 # creating panel of dates -------------------------------------------------
@@ -86,13 +86,13 @@ block_panel <- richmond_geo %>%
 
 richmond_geo <- richmond_geo %>% 
   group_by(year_month, GEOID, NAME) %>% 
-  summarize(number_gunshot_waking_hours = sum(waking_hours),
+  summarize(number_gunshot_working_hours = sum(working_hours),
             number_gunshots = n()) %>% 
   ungroup() %>% 
   arrange(desc(number_gunshots))
 
 richmond_geo <- richmond_geo %>% 
-  mutate(across(matches("^number|^waking"), ~replace_na(., 0)))
+  mutate(across(matches("^number|^working"), ~replace_na(., 0)))
 
 richmond_geo <- richmond_geo %>% 
   extract(NAME, into = c("census_block", "census_block_group", "census_tract"),
@@ -105,7 +105,7 @@ richmond_geo <- richmond_geo %>%
   mutate(shotspotter_city = "Richmond") %>% 
   select(NAME, census_block, census_block_group,
          census_tract, GEOID, year_month, 
-         number_gunshot_waking_hours, number_gunshots,
+         number_gunshot_working_hours, number_gunshots,
          shotspotter_city) %>% 
   mutate(number_w_duplicate_areamatch = NA)
 

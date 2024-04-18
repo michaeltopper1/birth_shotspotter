@@ -57,7 +57,7 @@ stockton_geo <- stockton_geo %>%
 stockton_geo <- stockton_geo %>% 
   mutate(time = hms::as_hms(datetime),
          hour = hour(time),
-         waking_hours = if_else(hour %in% c(6:23), 1, 0), .before = 1) 
+         working_hours = if_else(hour %in% c(9:17), 1, 0), .before = 1) 
 
 
 
@@ -86,14 +86,14 @@ block_panel <- stockton_geo %>%
 
 stockton_geo <- stockton_geo %>% 
   group_by(year_month, GEOID, NAME) %>% 
-  summarize(number_gunshot_waking_hours = sum(waking_hours),
+  summarize(number_gunshot_working_hours = sum(working_hours),
             number_gunshots = n()) %>% 
   ungroup() %>% 
   arrange(desc(number_gunshots)) 
 
 
 stockton_geo <- stockton_geo %>% 
-  mutate(across(matches("^number|^waking"), ~replace_na(., 0)))
+  mutate(across(matches("^number|^working"), ~replace_na(., 0)))
 
 stockton_geo <- stockton_geo %>% 
   extract(NAME, into = c("census_block", "census_block_group", "census_tract"),
@@ -105,7 +105,7 @@ stockton_geo <- stockton_geo %>%
   mutate(shotspotter_city = "Stockton") %>% 
   select(NAME, census_block, census_block_group,
          census_tract, GEOID, year_month, 
-         number_gunshot_waking_hours, number_gunshots,
+         number_gunshot_working_hours, number_gunshots,
          shotspotter_city) %>% 
   mutate(number_w_duplicate_areamatch = NA)
 

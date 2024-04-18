@@ -49,7 +49,7 @@ sf_joined <- sf_joined %>%
 ## put in waking hours for 7am-11pm
 sf_joined <- sf_joined %>% 
   mutate(hour = hour(datetime_shot),
-         waking_hour_shot = if_else(hour %in% c(7:23), 1, 0))
+         working_hours = if_else(hour %in% c(9:17), 1, 0))
 
 
 # creating panel of dates -------------------------------------------------
@@ -80,7 +80,7 @@ sf_joined <- sf_joined %>%
   st_drop_geometry() %>% 
   group_by(year_month, GEOID, NAME) %>% 
   summarize(number_w_duplicate_areamatch = sum(duplicate_area),
-            number_gunshot_waking_hours = sum(waking_hour_shot),
+            number_gunshot_working_hours = sum(working_hours),
             number_gunshots = n()) %>% 
   ungroup() 
 

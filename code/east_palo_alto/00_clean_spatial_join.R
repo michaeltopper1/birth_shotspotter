@@ -48,7 +48,7 @@ east_palo_joined <- east_palo_joined %>%
 east_palo_joined <- east_palo_joined %>% 
   mutate(time = hms::as_hms(date_time),
          hour = hour(time),
-         waking_hours = if_else(hour %in% c(6:23), 1, 0), .before = 1) 
+         working_hours = if_else(hour %in% c(9:17), 1, 0), .before = 1) 
 east_palo_joined %>% 
   arrange(desc(date))
 
@@ -79,7 +79,7 @@ block_panel <- east_palo_joined %>%
 
 east_palo_geo <- east_palo_joined %>% 
   group_by(year_month, GEOID, NAME) %>% 
-  summarize(number_gunshot_waking_hours = sum(waking_hours),
+  summarize(number_gunshot_working_hours = sum(working_hours),
             number_gunshots = n()) %>% 
   ungroup() %>% 
   arrange(desc(number_gunshots)) 
@@ -89,7 +89,7 @@ east_palo_geo <- east_palo_geo %>%
   filter(year_month < as_date("2019-09-01"))
 
 east_palo_geo <- east_palo_geo%>% 
-  mutate(across(matches("^number|^waking"), ~replace_na(., 0)))
+  mutate(across(matches("^number|^working"), ~replace_na(., 0)))
 
 east_palo_geo <- east_palo_geo %>% 
   extract(NAME, into = c("census_block", "census_block_group", "census_tract"),
@@ -101,7 +101,7 @@ east_palo_geo <- east_palo_geo %>%
   mutate(shotspotter_city = "East Palo Alto") %>% 
   select(NAME, census_block, census_block_group,
          census_tract, GEOID, year_month, 
-         number_gunshot_waking_hours, number_gunshots,
+         number_gunshot_working_hours, number_gunshots,
          shotspotter_city) %>% 
   mutate(number_w_duplicate_areamatch = NA)
 

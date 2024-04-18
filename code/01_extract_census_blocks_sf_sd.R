@@ -11,6 +11,7 @@ library(sf)
 
 ## getting variables to add in. Not really too necessary,
 ## I can add in more later using this package, but I just needed something other than geometry
+## I addded in population total
 variables <- load_variables(2020, "pl", cache = TRUE) %>% 
   slice(1) %>% pull(name)
 
