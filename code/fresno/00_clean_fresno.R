@@ -73,12 +73,15 @@ fresno_geo_joined <- fresno_geo_joined %>%
   filter(year_month <= as_date("2018-01-01"))
 
 
+
 fresno_geo_joined <- block_panel %>% 
   left_join(fresno_geo_joined,
             by = join_by(NAME == NAME,
                          GEOID == GEOID,
                          year_month == year_month))
 
+fresno_geo_joined <- fresno_geo_joined %>% 
+  filter(year_month <= as_date("2018-01-01"))
 
 ## replacing NAs with 0s for the shots
 fresno_geo_joined <- fresno_geo_joined %>% 

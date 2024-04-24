@@ -125,7 +125,6 @@ oakland_joined_2 <- oakland_joined_2 %>%
   mutate(number_w_duplicate_areamatch = NA)
 
 
-
 oakland_joined_1 %>% 
   write_csv("analysis_data/oakland_gunshots_blocks_1.csv")
 

@@ -37,4 +37,4 @@ ca_county_figure <- ca %>%
                                  size = 2.3) +
   ggthemes::theme_map()
 
-
+ggsave(ca_county_figure, filename = "figures/ca_county_figure.jpeg", width = 7, height = 5)
