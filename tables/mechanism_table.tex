@@ -4,19 +4,21 @@
 \centering
 \begin{threeparttable}
 \fontsize{11}{13}\selectfont
-\begin{tabular}[t]{>{\raggedright\arraybackslash}p{8cm}ccc}
+\begin{tabular}[t]{lcccccc}
 \toprule
-\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Complications} & \multicolumn{1}{c}{Visits} & \multicolumn{1}{c}{Late Visits} \\
-\cmidrule(l{3pt}r{3pt}){2-2} \cmidrule(l{3pt}r{3pt}){3-3} \cmidrule(l{3pt}r{3pt}){4-4}
-  & (1) & (2) & (3)\\
+\multicolumn{1}{c}{ } & \multicolumn{3}{c}{Low Education} & \multicolumn{3}{c}{High Education} \\
+\cmidrule(l{3pt}r{3pt}){2-4} \cmidrule(l{3pt}r{3pt}){5-7}
+\multicolumn{1}{c}{ } & \multicolumn{1}{c}{Complications} & \multicolumn{1}{c}{Visits} & \multicolumn{1}{c}{Late Visits} & \multicolumn{1}{c}{Complications} & \multicolumn{1}{c}{Visits} & \multicolumn{1}{c}{Late Visits} \\
+\cmidrule(l{3pt}r{3pt}){2-2} \cmidrule(l{3pt}r{3pt}){3-3} \cmidrule(l{3pt}r{3pt}){4-4} \cmidrule(l{3pt}r{3pt}){5-5} \cmidrule(l{3pt}r{3pt}){6-6} \cmidrule(l{3pt}r{3pt}){7-7}
+  & (1) & (2) & (3) & (4) & (5) & (6)\\
 \midrule
-Gunshots & -0.008 & -0.008 & -0.008\\
- & (0.019) & (0.019) & (0.019)\\
-Mean of Dependent Variable & 0.002 & 0.002 & 0.002\\
-Observations & 7,252 & 7,252 & 7,252\\
-FE: Census Block & X & X & X\\
+Gunshots & -0.006 & -0.006 & -0.006 & -0.006 & -0.006 & -0.006\\
+ & (0.017) & (0.017) & (0.017) & (0.017) & (0.017) & (0.017)\\
+Mean of Dependent Variable & -0.008 & -0.008 & -0.008 & -0.008 & -0.008 & -0.008\\
+Observations & 7,252 & 7,252 & 7,252 & 7,252 & 7,252 & 7,252\\
+FE: Census Block & X & X & X & X & X & X\\
 \addlinespace
-FE: Year by Month & X & X & X\\
+FE: Year by Month & X & X & X & X & X & X\\
 \bottomrule
 \end{tabular}
 \begin{tablenotes}

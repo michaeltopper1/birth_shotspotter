@@ -15,8 +15,9 @@ segment_figure <- segment %>%
   ggplot() +
   geom_segment(aes(x = city, xend = city,
                    y = start, yend = end)) +
-  geom_point( aes(x=city, y=start), color="grey", alpha = 0.7, size=3 ) +
-  geom_point( aes(x=city, y=end), color="black",alpha = 0.7, size=3 ) +
+  geom_point( aes(x=city, y=start), color="dark green", alpha = 0.7, size=3,
+              shape = "circle") +
+  geom_point( aes(x=city, y=end), color="dark red",alpha = 0.7, size=3, shape = "square") +
   geom_text(aes(x = city, y =start, label = length), size = 3,
             vjust = 2, hjust = -.1) +
   scale_y_date(date_labels="%Y",date_breaks  ="1 year") +

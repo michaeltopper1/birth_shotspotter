@@ -21,25 +21,24 @@ gof_mapping <- tribble(~raw, ~clean, ~fmt,
 footnotes <- map(list("* p < 0.1, ** p < 0.05, *** p < 0.01",
                       "Add in all footnotes here."), ~str_remove_all(., "\n"))
 
-mechanism_table <- panelsummary(six_models, 
-                                caption = "\\label{mechanism_table}Effect of Gunshot Noise on Prenatal Visits (OLS)",
+control_table <- panelsummary(six_models, 
+                                     caption = "\\label{control_table}Effect of Gunshot Noise on Controls (OLS)",
                                      mean_dependent = T, 
                                      stars = T,
-                                    format = "latex",
                                      gof_map = gof_mapping,
                                      pretty_num = T,
-                                     coef_map = c("number_gunshots"= "Gunshots")) %>% 
+                                     coef_map = c("number_gunshots"= "Gunshots"),
+                                     format = "latex") %>% 
   add_header_above(c(" " = 1,
-                     "Complications" = 1,
-                     "Visits" = 1,
-                     "Late Visits" = 1,
-                     "Complications" = 1,
-                     "Visits" = 1,
-                     "Late Visits" = 1)) %>% 
-  add_header_above(c(" " = 1, "Low Education" = 3, "High Education" = 3)) %>% 
-  # column_spec(1, width = "8cm") %>% 
+                     "Male Infant" = 1,
+                     "First-time Mother" = 1,
+                     "Mother's Age" = 1,
+                     "Hispanic" = 1,
+                     "Bachelors or Higher" = 1,
+                     "Black" = 1)) %>% 
+  column_spec(1, width = "5cm") %>% 
   footnote(footnotes, threeparttable = T) %>% 
   kable_styling(latex_options = "HOLD_position", font_size = 11)
 
-writeLines(mechanism_table, "tables/mechanism_table.tex")
+writeLines(control_table, "tables/control_table.tex")
 
