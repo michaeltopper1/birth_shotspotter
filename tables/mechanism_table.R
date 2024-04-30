@@ -30,12 +30,12 @@ mechanism_table <- panelsummary(six_models,
                                      pretty_num = T,
                                      coef_map = c("number_gunshots"= "Gunshots")) %>% 
   add_header_above(c(" " = 1,
-                     "Complications" = 1,
+                     "Smoking" = 1,
                      "Visits" = 1,
-                     "Late Visits" = 1,
-                     "Complications" = 1,
+                     "Delayed Care" = 1,
+                     "Smoking" = 1,
                      "Visits" = 1,
-                     "Late Visits" = 1)) %>% 
+                     "Delayed Care" = 1)) %>% 
   add_header_above(c(" " = 1, "Low Education" = 3, "High Education" = 3)) %>% 
   # column_spec(1, width = "8cm") %>% 
   footnote(footnotes, threeparttable = T) %>% 
