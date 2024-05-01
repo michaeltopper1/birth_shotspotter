@@ -12,12 +12,8 @@ sst <- sst %>%
 
 
 summary_stats <- datasummary(
-  (`Very Preterm` = hp) +
+    (`Very Preterm` = hp) +
     (`Very Low Birthweight` = mpg) +
-    (`Gestation Length (weeks)` = hp) +
-    (`Preterm` = mpg) +
-    (`Low Birthweight` = hp) +
-    (`Birthweight (grams)` = mpg) +
     (`Age` = hp) +
     (`Bachelors or Higher` = mpg) +
     (`Hispanic` = hp) +
@@ -31,18 +27,16 @@ summary_stats <- datasummary(
   output = "data.frame",
   escape = F)
 
-
-summary_stats <- summary_stats %>% 
+summary_stats_pres <- summary_stats %>% 
   kbl(booktabs = T,
-      caption = "\\label{summary_stats}Summary Statistics",
-      format = "latex") %>% 
-  kable_styling(latex_options = "HOLD_position", font_size = 11) %>% 
-  group_rows(group_label = "Panel A: Birth Outcomes", 1, 6,
+      format = "html") %>% 
+  kable_classic(full_width = T, html_font = "Cambria") %>% 
+  group_rows(group_label = "Panel A: Birth Outcomes", 1, 2,
   ) %>% 
-  group_rows(group_label = "Panel B: Controls", 7 , 14,
+  group_rows(group_label = "Panel B: Controls", 3 , 10,
              latex_gap_space = "0.3cm") %>% 
   column_spec(1, width = "8cm") %>% 
-  footnote("Add footnotes here",threeparttable = T)
+  footnote("Total number of observations is 38,373.",threeparttable = T)
 
 
-writeLines(summary_stats, "tables/summary_stats.tex")
+writeLines(summary_stats_pres, "/Users/michaeltopper/shotspotter_crime/presentations/tables_births/summary_stats_pres.html")
