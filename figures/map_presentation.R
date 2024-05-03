@@ -48,7 +48,7 @@ ca_map_presentation <- ca %>%
   labs(title = "The Nine Sample Cities in California",
        subtitle = "Counties are marked in red. Cities are black points.") +
   ggsflabel::geom_sf_label_repel(data = cities, aes(label = name),
-                                 size = 4.7) +
+                                 size = 4.7, max.overlaps = 20 ) +
   ggthemes::theme_map() +
   theme(plot.title = element_text(size=18))
 
